@@ -3,6 +3,7 @@ package it.unibo.pps.e1;
 public class SilverBankAccount implements BankAccount{
 
     private final BankAccount base;
+    private static final int FEE = 1;
 
     public SilverBankAccount(BankAccount base) {
         this.base = base;
@@ -20,6 +21,6 @@ public class SilverBankAccount implements BankAccount{
         if (this.getBalance() < amount){
             throw new IllegalStateException();
         }
-        this.base.withdraw(amount + 1);
+        this.base.withdraw(amount + FEE);
     }
 }
