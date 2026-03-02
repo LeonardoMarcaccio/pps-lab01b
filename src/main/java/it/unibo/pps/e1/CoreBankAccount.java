@@ -13,6 +13,18 @@ class CoreBankAccount implements BankAccount {
     }
 
     public void withdraw(int amount) {
-        this.balance = this.balance - amount;
+        if (canWithdraw(amount)) {
+            this.balance = this.balance - computeAmountWithFee(amount);
+        } else {
+            throw new IllegalStateException();
+        }
     }
+
+    protected boolean canWithdraw(int amount) {
+        return true;
+    };
+
+    protected int computeAmountWithFee(int amount) {
+        return amount;
+    };
 }
