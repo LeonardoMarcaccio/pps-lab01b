@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CoreBankAccountTest implements BankAccountTest {
 
@@ -38,6 +39,17 @@ public class CoreBankAccountTest implements BankAccountTest {
         this.account.deposit(depositAmount);
         this.account.withdraw(withdrawAmount);
         assertEquals(expectedAmount, this.account.getBalance());
+    }
+
+    public void testCannotWithdrawMoreThanAvailable(
+            int deposit,
+            int impossibleWithdraw
+    ){
+        this.account.deposit(deposit);
+        assertThrows(
+                IllegalStateException.class,
+                () -> this.account.withdraw(impossibleWithdraw)
+        );
     }
 
     protected BankAccount getAccount() {

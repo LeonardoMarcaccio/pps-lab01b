@@ -8,5 +8,9 @@ public interface BankAccountTest {
             int withdrawAmount,
             int expectedAmount
     );
+    void testCannotWithdrawMoreThanAvailable(
+            int deposit,
+            int impossibleWithdraw
+    );
 }
 
