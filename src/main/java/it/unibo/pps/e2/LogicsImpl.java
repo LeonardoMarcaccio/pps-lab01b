@@ -57,8 +57,7 @@ public class LogicsImpl implements Logics {
             this.knight.move(row, col);
             return this.pawn.isCurrentPosition(row, col);
         }
-		// Below a compact way to express allowed moves for the knight
-        return this.pawn.equals(this.knight);
+        return false;
 	}
 
 	@Override
