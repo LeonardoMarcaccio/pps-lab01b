@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasicPieceTest {
@@ -33,12 +34,32 @@ public class BasicPieceTest {
         "1, 0",
         "0, 1"
     })
-    void testGenericMoves(int row, int col) {
+    void testRightMoves(int row, int col) {
         this.piece.move(row, col);
         assertTrue(this.piece.isCurrentPosition(row,col));
     }
 
-    Piece createPiece() {
+    @Test
+    void testCanTakeValidPiece() {
+        Piece pieceToTake = new BasicPiece(
+            BASE_POSITION_X,
+            BASE_POSITION_Y
+        );
+        assertTrue(this.piece.canTake(pieceToTake));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "1, 1",
+        "1, 0",
+        "0, 1"
+    })
+    void testCannotTakeInvalidPiece(int row, int col) {
+        Piece pieceToTake = new BasicPiece(row, col);
+        assertFalse(this.piece.canTake(pieceToTake));
+    }
+
+    protected Piece createPiece() {
         return new BasicPiece(
             BASE_POSITION_X,
             BASE_POSITION_Y

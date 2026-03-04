@@ -26,6 +26,9 @@ public class BasicPiece implements Piece{
 
     @Override
     public boolean canTake(Piece piece) {
-        return false;
+        return piece.isCurrentPosition(
+            this.currentPos.getX(),
+            this.currentPos.getY()
+        );
     }
 }
