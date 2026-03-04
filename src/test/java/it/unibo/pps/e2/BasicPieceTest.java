@@ -27,7 +27,16 @@ public class BasicPieceTest {
         );
     }
 
-
+    @ParameterizedTest
+    @CsvSource({
+        "1, 1",
+        "1, 0",
+        "0, 1"
+    })
+    void testGenericMoves(int row, int col) {
+        this.piece.move(row, col);
+        assertTrue(this.piece.isCurrentPosition(row,col));
+    }
 
     Piece createPiece() {
         return new BasicPiece(
