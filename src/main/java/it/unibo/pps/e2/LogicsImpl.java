@@ -9,7 +9,7 @@ import java.util.*;
 public class LogicsImpl implements Logics {
 	
 	private final Piece pawn;
-	private Piece knight;
+	private final Piece knight;
 	private final Random random = new Random();
 	private final int size;
 	 
@@ -37,13 +37,13 @@ public class LogicsImpl implements Logics {
         this.size = size;
     }
     
-	private final Pair<Integer,Integer> randomEmptyPosition(){
+	private Pair<Integer,Integer> randomEmptyPosition(){
     	Pair<Integer,Integer> pos = new Pair<>(
             this.random.nextInt(size),
             this.random.nextInt(size)
         );
     	// the recursive call below prevents clash with an existing pawn
-    	return this.pawn!=null && this.pawn.equals(pos)
+    	return this.pawn!=null && this.pawn.isCurrentPosition(pos.getX(), pos.getY())
             ? randomEmptyPosition()
             : pos;
     }

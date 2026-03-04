@@ -15,8 +15,8 @@ public class LogicTest {
 
     @BeforeEach
     void beforeEach() {
-        this.knightBasePosition = new Pair<Integer, Integer>(2, 2);
-        this.pawnBasePosition = new Pair<Integer, Integer>(3, 4);
+        this.knightBasePosition = new Pair<>(2, 2);
+        this.pawnBasePosition = new Pair<>(3, 4);
         this.logics = new LogicsImpl(
             pawnBasePosition,
             knightBasePosition,
