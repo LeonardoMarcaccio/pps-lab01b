@@ -1,6 +1,8 @@
-package it.unibo.pps.e2;
+package it.unibo.pps.e2.Pieces;
 
-public class BasicPiece implements Piece{
+import it.unibo.pps.e2.Pair;
+
+public class BasicPiece implements Piece {
     private Pair<Integer, Integer> currentPos;
 
     public BasicPiece(int basePositionX, int basePositionY) {
@@ -9,6 +11,11 @@ public class BasicPiece implements Piece{
 
     @Override
     public void move(int row, int col) {
+        if (isCurrentPosition(row, col)) {
+            throw new IllegalStateException(
+                "Attempting to move into current location"
+            );
+        }
         if(this.isMoveValid(row, col)) {
             this.currentPos = new Pair<>(row, col);
         }
@@ -30,5 +37,16 @@ public class BasicPiece implements Piece{
             this.currentPos.getX(),
             this.currentPos.getY()
         );
+    }
+
+    protected Pair<Integer, Integer> getCurrentPos() {
+        return new Pair<>(
+            this.currentPos.getX(),
+            this.currentPos.getY()
+        );
+    }
+
+    protected void setCurrentPos(Pair<Integer, Integer> newPos) {
+        this.currentPos = newPos;
     }
 }

@@ -1,17 +1,20 @@
 package it.unibo.pps.e2;
 
+import it.unibo.pps.e2.Pieces.BasicPiece;
+import it.unibo.pps.e2.Pieces.Piece;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicPieceTest {
-    private Piece piece;
-    private static final int BASE_POSITION_X = 3;
-    private static final int BASE_POSITION_Y = 3;
+    Piece piece;
+    static final int BASE_POSITION_X = 5;
+    static final int BASE_POSITION_Y = 5;
+    static final String CURRENT_LOCATION_ERROR =
+        "Attempting to move into current location";
 
     @BeforeEach
     void beforeEach() {
@@ -37,6 +40,18 @@ public class BasicPieceTest {
     void testRightMoves(int row, int col) {
         this.piece.move(row, col);
         assertTrue(this.piece.isCurrentPosition(row,col));
+    }
+
+    @Test
+    void testAttemptToMoveToCurrentPosition() {
+        Exception exception = assertThrows(
+            IllegalStateException.class,
+            () -> this.piece.move(BASE_POSITION_X, BASE_POSITION_Y)
+        );
+        assertEquals(
+            CURRENT_LOCATION_ERROR,
+            exception.getMessage()
+        );
     }
 
     @Test
