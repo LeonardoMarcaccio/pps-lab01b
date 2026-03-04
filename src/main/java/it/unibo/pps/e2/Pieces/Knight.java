@@ -12,10 +12,6 @@ public class Knight extends BasicPiece{
         Pair<Integer, Integer> currentPos = this.getCurrentPos();
         int deltaX = row-currentPos.getX();
         int deltaY = col-currentPos.getY();
-        if (deltaX !=0 && deltaY !=0 && Math.abs(deltaX)+Math.abs(deltaY)==3) {
-            this.setCurrentPos(new Pair<>(row, col));
-            return true;
-        }
-        return false;
+        return deltaX != 0 && deltaY != 0 && Math.abs(deltaX) + Math.abs(deltaY) == 3;
     }
 }

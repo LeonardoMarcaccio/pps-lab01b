@@ -45,8 +45,4 @@ public class BasicPiece implements Piece {
             this.currentPos.getY()
         );
     }
-
-    protected void setCurrentPos(Pair<Integer, Integer> newPos) {
-        this.currentPos = newPos;
-    }
 }
