@@ -23,11 +23,12 @@ public class BasicPieceTest {
 
     @Test
     void testGivenPositionConstructor() {
-        assertTrue(
-            this.piece.isCurrentPosition(
+        assertEquals(
+            new Pair<>(
                 BASE_POSITION_X,
                 BASE_POSITION_Y
-            )
+            ),
+            this.piece.getCurrentPos()
         );
     }
 
@@ -39,7 +40,7 @@ public class BasicPieceTest {
     })
     void testRightMoves(int row, int col) {
         this.piece.move(row, col);
-        assertTrue(this.piece.isCurrentPosition(row,col));
+        assertEquals(new Pair<>(row, col), this.piece.getCurrentPos());
     }
 
     @Test
@@ -52,26 +53,6 @@ public class BasicPieceTest {
             CURRENT_LOCATION_ERROR,
             exception.getMessage()
         );
-    }
-
-    @Test
-    void testCanTakeValidPiece() {
-        Piece pieceToTake = new BasicPiece(
-            BASE_POSITION_X,
-            BASE_POSITION_Y
-        );
-        assertTrue(this.piece.canTake(pieceToTake));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-        "1, 1",
-        "1, 0",
-        "0, 1"
-    })
-    void testCannotTakeInvalidPiece(int row, int col) {
-        Piece pieceToTake = new BasicPiece(row, col);
-        assertFalse(this.piece.canTake(pieceToTake));
     }
 
     protected Piece createPiece() {

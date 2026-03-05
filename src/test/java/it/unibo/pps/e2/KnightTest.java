@@ -5,8 +5,7 @@ import it.unibo.pps.e2.Pieces.Piece;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightTest extends BasicPieceTest{
 
@@ -23,7 +22,7 @@ public class KnightTest extends BasicPieceTest{
     })
     void testRightMoves(int row, int col) {
         this.piece.move(row, col);
-        assertTrue(this.piece.isCurrentPosition(row,col));
+        assertEquals(new Pair<>(row, col), this.piece.getCurrentPos());
     }
 
     @ParameterizedTest
@@ -35,7 +34,7 @@ public class KnightTest extends BasicPieceTest{
     })
     void testWrongMoves(int row, int col) {
         this.piece.move(row, col);
-        assertFalse(this.piece.isCurrentPosition(row,col));
+        assertNotEquals(this.piece.getCurrentPos(), new Pair<>(row, col));
     }
 
     @Override

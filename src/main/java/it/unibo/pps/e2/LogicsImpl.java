@@ -43,7 +43,7 @@ public class LogicsImpl implements Logics {
             this.random.nextInt(size)
         );
     	// the recursive call below prevents clash with an existing pawn
-    	return this.pawn!=null && this.pawn.isCurrentPosition(pos.getX(), pos.getY())
+    	return this.pawn!=null && this.pawn.getCurrentPos().equals(pos)
             ? randomEmptyPosition()
             : pos;
     }
@@ -55,18 +55,18 @@ public class LogicsImpl implements Logics {
 		}
         if (this.knight.isMoveValid(row, col)) {
             this.knight.move(row, col);
-            return this.pawn.isCurrentPosition(row, col);
+            return this.pawn.getCurrentPos().equals(new Pair<>(row, col));
         }
         return false;
 	}
 
 	@Override
 	public boolean hasKnight(int row, int col) {
-        return this.knight.isCurrentPosition(row, col);
+        return this.knight.getCurrentPos().equals(new Pair<>(row, col));
 	}
 
 	@Override
 	public boolean hasPawn(int row, int col) {
-        return this.pawn.isCurrentPosition(row, col);
+        return this.pawn.getCurrentPos().equals(new Pair<>(row, col));
 	}
 }

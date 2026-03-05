@@ -11,7 +11,7 @@ public class BasicPiece implements Piece {
 
     @Override
     public void move(int row, int col) {
-        if (isCurrentPosition(row, col)) {
+        if (this.currentPos.equals(new Pair<>(row, col))) {
             throw new IllegalStateException(
                 "Attempting to move into current location"
             );
@@ -22,24 +22,12 @@ public class BasicPiece implements Piece {
     }
 
     @Override
-    public boolean isCurrentPosition(int row, int col) {
-        return currentPos.equals(new Pair<>(row, col));
-    }
-
-    @Override
     public boolean isMoveValid(int row, int col) {
         return true;
     }
 
     @Override
-    public boolean canTake(Piece piece) {
-        return piece.isCurrentPosition(
-            this.currentPos.getX(),
-            this.currentPos.getY()
-        );
-    }
-
-    protected Pair<Integer, Integer> getCurrentPos() {
+    public Pair<Integer, Integer> getCurrentPos() {
         return new Pair<>(
             this.currentPos.getX(),
             this.currentPos.getY()
