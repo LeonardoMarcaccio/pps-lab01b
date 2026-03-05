@@ -43,7 +43,7 @@ public class LogicsImpl implements Logics {
             this.random.nextInt(size)
         );
     	// the recursive call below prevents clash with an existing pawn
-    	return this.pawn!=null && this.pawn.getCurrentPos().equals(pos)
+    	return this.pawn!=null && this.hasPawn(pos.getX(), pos.getY())
             ? randomEmptyPosition()
             : pos;
     }
